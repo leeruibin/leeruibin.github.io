@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java简单爬虫制作并爬取图片 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##简易爬虫制作
+###什么是爬虫###我现在对爬虫的印象只停留在可以爬取网页的内容，可以直接从网页中爬取链接，图片等有用的信息并分析他们。目前我做到的爬取的图片在我看来比直接访问的优势就在于如果想从网上下载很多图片，就可以直接爬取图片保存到本地，不用再一个一个访问后再下载。想使用爬虫，
+首先你要给它一个种子链接URL
+在种子链接的页面查找其他的URL，重复1步骤
+有链接有页面，然后你可以在页面中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java简单爬虫制作并爬取图片">
+<meta property="og:url" content="http://yoursite.com/2017/03/21/简单网络爬虫/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="##简易爬虫制作
+###什么是爬虫###我现在对爬虫的印象只停留在可以爬取网页的内容，可以直接从网页中爬取链接，图片等有用的信息并分析他们。目前我做到的爬取的图片在我看来比直接访问的优势就在于如果想从网上下载很多图片，就可以直接爬取图片保存到本地，不用再一个一个访问后再下载。想使用爬虫，
+首先你要给它一个种子链接URL
+在种子链接的页面查找其他的URL，重复1步骤
+有链接有页面，然后你可以在页面中">
+<meta property="og:image" content="http://yoursite.com/images/logo.png">
+<meta property="og:updated_time" content="2017-03-21T03:37:11.920Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java简单爬虫制作并爬取图片">
+<meta name="twitter:description" content="##简易爬虫制作
+###什么是爬虫###我现在对爬虫的印象只停留在可以爬取网页的内容，可以直接从网页中爬取链接，图片等有用的信息并分析他们。目前我做到的爬取的图片在我看来比直接访问的优势就在于如果想从网上下载很多图片，就可以直接爬取图片保存到本地，不用再一个一个访问后再下载。想使用爬虫，
+首先你要给它一个种子链接URL
+在种子链接的页面查找其他的URL，重复1步骤
+有链接有页面，然后你可以在页面中">
+<meta name="twitter:image" content="http://yoursite.com/images/logo.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-简单网络爬虫" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/21/简单网络爬虫/" class="article-date">
+  <time datetime="2017-03-21T03:37:11.919Z" itemprop="datePublished">2017-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java简单爬虫制作并爬取图片
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##简易爬虫制作</p>
+<p>###什么是爬虫###<br>我现在对爬虫的印象只停留在可以爬取网页的内容，可以直接从网页中爬取链接，图片等有用的信息并分析他们。目前我做到的爬取的图片在我看来比直接访问的优势就在于如果想从网上下载很多图片，就可以直接爬取图片保存到本地，不用再一个一个访问后再下载。<br>想使用爬虫，</p>
+<p>首先你要给它一个种子链接URL</p>
+<p>在种子链接的页面查找其他的URL，重复1步骤</p>
+<p>有链接有页面，然后你可以在页面中查找需要的内容</p>
+<p>这其中需要的知识点</p>
+<p>http请求器</p>
+<p>由于不是用浏览器访问，我们需要在本地的文件中发起请求获取资源，有两种实现方法，第一种Java提供的java.net包中APIs，另一种是选用第三方的工具，我选的是HttpClient这个资源，相对来说第三方工具会比Java本身提供的APIs的功能更加强大和灵活一些。</p>
+<p>内容解析器</p>
+<p>上面我们通过请求获取了资源，然后就是要去解析了，基本上获取的都是页面，一大串的HTML页面代码，那么我们也可以通过来两种方式来解析资源，一种是正则表达式，一种是第三方的解析器(比如，jsoup，htmlparse等)，本系列会先使用正则表达式来解析，最后应该也会有第三方的解析文章。</p>
+<p>主要的梗概大概就是这没多，我再来梳理总结一下</p>
+<p>取一个种子URL，比如www.oschina.net</p>
+<p>通过httpclient请求获取页面资源(获取的页面资源其中肯定包含了其他的URL，可以作为下一个种子循环使用)</p>
+<p>通过正则或者jsoup解析出想要的内容(解析出其他的URL链接，同时获取本页面的所有图片，这都是可以的)</p>
+<p>使用3获取的下一个种子URL，重复1</p>
+<p>这就是关于爬虫的基本知识</p>
+<p>##</p>
+<p>###使用httpclient</p>
+<p>我在学习的过程中使用的组件是httpclient,推荐到官网下载不会有什么乱七八糟的东西。官网地址：<a href="https://hc.apache.org/" target="_blank" rel="external">httpclient</a></p>
+<p>httpclient使用步骤</p>
+<blockquote>
+<p>获取httpclient实例，实例获取是用静态方法获取的</p>
+<blockquote>
+<p>主要是使用HttpClients这个类的静态方法进行获取,即假装一个用户准备访问网页</p>
+</blockquote>
+<p>获取httpGet实例</p>
+<blockquote>
+<p>httpclient封装了http的各种方法，get只是其中一个，还有POST,HEAD之类的都可以,其中get，post，put，delete对应不同功能<br>get为请求查看，post创建，put是更新或创建，delete删除</p>
+</blockquote>
+<p>执行请求获取httpResponse响应</p>
+<blockquote>
+<p>执行就是httpclient实例execute httpget实例,即获取发送get请求之后的回复网页</p>
+</blockquote>
+<p>解析response响应的内容</p>
+<blockquote>
+<p>解析响应呢，有两种方法，一种是httpclient提供的httpentity实例解析的，还有一种是从输入流inputstream中获取，例子中是从inputstream中获取</p>
+</blockquote>
+<p>记得关闭资源，不要问为什么，这是一个好习惯，真要问为什么就是他会释放资源。</p>
+</blockquote>
+<p><em>代码如下</em><br>    package reptile;</p>
+<pre><code>import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+
+public class HttpGetUtils {
+    /**
+     * get 方法
+     * @param url
+     * @return
+     */
+    public static String get(String url){
+        String result = &quot;&quot;;
+        try{
+            //获取httpclient实例
+            CloseableHttpClient httpclient = HttpClients.createDefault();
+            //获取方法实例 GET方法  等于说获取get的消息准备发送给服务器
+            HttpGet httpGet = new HttpGet(url);
+            //执行方法得到响应 网页发送请求后会返回一个数据可以根据这个数据判断是否正确连接这个网页  这个response中有网页也有各种信息
+            CloseableHttpResponse response = httpclient.execute(httpGet);
+            try{
+                //如果正确执行而且返回值正确即可解析
+                if(response != null 
+                        &amp;&amp; response.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+                    System.out.println(response.getStatusLine());
+                    HttpEntity entity = response.getEntity();
+                    //从输入流中解析结果  utf-8 为这个标准的字符集
+                    result = readResponse(entity,&quot;utf-8&quot;);
+
+                }
+            }finally{
+                response.close();
+                httpclient.close();
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+        return result;
+    }
+    /**
+     * 解析网页的方法
+     * @param entity
+     * @param string
+     * @return
+     */
+    private static String readResponse(HttpEntity resEntity, String charset) {
+        StringBuffer res = new StringBuffer();
+        BufferedReader reader = null;
+        try{
+            if(resEntity == null){
+                return null;
+            }
+
+            reader = new BufferedReader(new InputStreamReader(resEntity.getContent(), charset));
+            String line = null;
+
+            while((line = reader.readLine()) != null){
+                res.append(line);
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            try{
+                if(reader!=null){
+                    reader.close();
+                }
+            }catch(IOException e){
+
+            }
+        }
+
+        return res.toString();
+    }
+
+
+}
+</code></pre><p>这样我们就能够获取一个网页的内容了，之后我们需要解析这个网页从中获取你想要的内容</p>
+<p>##</p>
+<p>###正则表达式###<br>正则表达式如同printf里的格式一般可以识别特定的内容，不过他有自己特定的语法，详细的语法说明请看<a href="http://www.runoob.com/java/java-regular-expressions.html" target="_blank" rel="external">runoob.com</a>或者<a href="http://www.cnblogs.com/ITtangtang/archive/2012/05/01/2478061.html" target="_blank" rel="external">blog</a>这两个会有很多帮助<br>在这里列一些简答的语法<br>    元字符</p>
+<pre><code>\b 用于单词的间隙处，\bhello\b表示匹配hello单词
+
+\d 匹配数字 0\d\d 表示匹配011,023，以0开头三位数字，还可以写成0\d{2}，0后面两个数字
+
+.  匹配换行符以外的所有字符
+
+* 它前面的字符可以无限重复
+
+\s 任意的空白符 ，比如空格，TAB
+
+\w 字母或数字或下划线或汉字等
+
++ 和*类似，但是+至少一次，*可能0此
+
+^ 字符串开始
+
+$ 字符串结束
+
+{5,12} 长度限制在5到12之间
+
+？ 重复0到1次
+
+[ ] 表示需要查找的内容，比如[aeiou]包含元音字母，[.?*]包含.?*的串
+
+字符转义
+
+用 \ 来转义元字符，比如要查找含*的串，\* == *
+
+分支条件
+
+| 表示或，两个表达式连接 a|b，表示满足表达式a或者b
+
+分组
+
+（）分组，可以把多个匹配放到一块，重复查找
+
+反义
+
+\W\S\D\B把小写改成大写，[]里的加^，比如[^aeiou]不是元音字母
+
+注释
+
+(?#comment) 对表达式进行注释，比如 2\d[0-2](?#200-292)   表示200-292之间的数字
+
+贪婪与懒惰
+
+a.*b，它将会匹配最长的以a开始，以b结束的字符串。如果用它来搜索aabab的话，它会匹配整个字符串aabab。这被称为贪婪匹配。
+
+在 . * ？ {n,m}等后面加？则表示尽可能少的匹配，.? *? ?? {n,m}?
+
+可能你看了上面还是不知道在说什么不要紧，下面写了java的正则API之后会举例说明
+</code></pre><p>语法这些东西是需要好好理解的，个人认为我在写爬虫最大的问题就是正则表达式的书写，虽然可以直接找相关的工具。。。</p>
+<p>在百度的网页按f12找如下的图示<br><img src="/images/logo.png" alt=""></p>
+<p>接下来是一个实例</p>
+<pre><code>group是在使用matcher的时候如果正则表达式带有（）他会把匹配的括号里的内容放到group（1）里而原字符串放在group（0）
+
+使用的流程可以分为下面几个步骤
+
+Pattern的compile静态方法获取pattern对象
+
+pattern调用自身的matcher方法返回Matcher对象matcher
+
+matcher对象通过find，matches，lookingAt等方法进行匹配
+
+package reptile;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexStringUtils {
+
+    public static String regexString(String targetStr,String patternStr){
+        //编辑正则表达式
+        Pattern pattern = Pattern.compile(patternStr);
+        //定义一个matcher来做匹配
+        Matcher matcher = pattern.matcher(targetStr);
+        //int i=209;//这个是后续的时候为了下载图片要给他定义不同的名字到后续DownloadUtils的时候才有用
+        //如果能匹配到
+        if(matcher.find()){
+            //打印结果
+            System.out.println(&quot;find it.&quot;);
+            //DownloadUtils.get(matcher.group(1),i);
+            //i++;
+            return matcher.group(0);
+        }
+        return &quot;&quot;;
+    }
+}
+</code></pre><p>这样子之后我们就需要定义一个main方法来实现这些操作<br>    package reptile;</p>
+<pre><code>public class App {
+    public static void main(String[] args){
+        //不同网页可能会有不同的标签
+        String regex = &quot;src=\&quot;http://([\\w[./#_-]]+)\&quot;&quot;;
+        System.out.println(regex);
+
+        String result = HttpGetUtils.get(url);
+
+//        String result = DownloadUtils.get(url);
+        System.out.println(result);
+        String src = RegexStringUtils.regexString(result, regex);
+         System.out.println(src);
+    }
+}
+</code></pre><p>大概输出结果是这样</p>
+<pre><code>hidefocus.+?src=&quot;//(.+?)&quot;
+HTTP/1.1 200 OK
+&lt;!DOCTYPE html&gt;&lt;!--STATUS OK--&gt;&lt;html&gt;&lt;head&gt;&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;.....中间的就省略了&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+www.baidu.com/img/bd_logo1.png
+</code></pre><p>最后我们就需要把找到的图片给下载下来，这时需要用到流式操作，具体如果操作请自行学习，最好能够下载下来java的api，上边有各种类的定义与方法说明</p>
+<p>最后的类</p>
+<pre><code>package reptile;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+
+public class DownloadUtils {
+
+    public static String get(String url,int i){
+
+        String filename = &quot;&quot;;
+        String tergetUrl = &quot;http://&quot;+url;
+        try{
+            CloseableHttpClient httpclient = HttpClients.createDefault();
+            HttpGet httpGet = new HttpGet(tergetUrl);
+            CloseableHttpResponse response = httpclient.execute(httpGet);
+
+            try{
+                //同意请求
+                if(response != null 
+                        &amp;&amp; response.getStatusLine().getStatusCode()==HttpStatus.SC_OK){
+                    System.out.println(response.getStatusLine());;
+                    HttpEntity entity = response.getEntity();
+                    filename = download(entity,i);
+
+                }
+            }finally{
+                httpclient.close();
+                response.close();
+            }
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return filename;
+    }
+
+    private static String download(HttpEntity resEntity,int i) {
+        //保存路径    
+        String dirPath = &quot;d:\\img\\&quot;;
+        //图片名称
+        String fileName = &quot;sssss&quot;+i+&quot;.png&quot;;
+        //如果没有先创建目录
+        File file = new File(dirPath);
+        if(file == null || !file.exists()){
+            file.mkdirs();
+        }
+        //确定完整目录
+        String realPath = dirPath.concat(fileName);
+        File filePath = new File(realPath);
+        if(file == null || !filePath.exists()){
+            try{
+                filePath.createNewFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+
+        //得到输入流，把输入流放入缓冲区，从缓冲区读取flush，关闭资源
+        BufferedOutputStream bos = null;
+        InputStream is = null;
+        try{
+            if(resEntity == null){
+                return null;
+            }
+            is = resEntity.getContent();
+            bos = new BufferedOutputStream(new FileOutputStream(filePath));
+            byte[] bytes = new byte[1024];
+            int len=-1;
+            while((len = is.read(bytes))!=-1){
+                bos.write(bytes,0,len);
+            }
+            bos.flush();
+            bos.close();
+        }catch(IOException e){
+            e.printStackTrace();
+        }finally{
+            try{
+                if(is!=null){
+                    is.close();
+                }
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+
+
+        return filePath.toString();
+    }
+}
+</code></pre><p>如果成功的话你就可以看到你保存的图片了，之后你就可以爬任何你想要的网页上的图片了，中间遇到一个问题，有些带有hide标签的网页在爬取的过程中爬不到东西，这个问题还需要深入研究。好了这篇文章就这样结束了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/21/简单网络爬虫/" data-id="cj0izpq5d0003lcuon8jhuqgh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/19/制作自己的qq机器人/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">实现自己的qq机器人</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/21/简单网络爬虫/">java简单爬虫制作并爬取图片</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/19/制作自己的qq机器人/">实现自己的qq机器人</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/19/制作自己的博客并上传/">制作自己的博客并上传</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/18/once_study/">once_study</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/16/little_bean/">little bean</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
