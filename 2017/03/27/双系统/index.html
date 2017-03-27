@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="title： 学习##linux与windows双系统安装
+###安装linux###需要使用linuxu盘制作工具制作启动u盘推荐使用ultraiso曾使用过Universal-USB-Installer使用时出现了一点问题到最后u盘还是启动不了。
+有的iso文件带有setup可直接在系统中双击打开安装系统，不需要制作系统u盘
+在安装双系统的时候个人感觉最好另开辟一个分区如linux的话20g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2017/03/27/双系统/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="title： 学习##linux与windows双系统安装
+###安装linux###需要使用linuxu盘制作工具制作启动u盘推荐使用ultraiso曾使用过Universal-USB-Installer使用时出现了一点问题到最后u盘还是启动不了。
+有的iso文件带有setup可直接在系统中双击打开安装系统，不需要制作系统u盘
+在安装双系统的时候个人感觉最好另开辟一个分区如linux的话20g">
+<meta property="og:updated_time" content="2017-03-27T00:09:10.738Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="title： 学习##linux与windows双系统安装
+###安装linux###需要使用linuxu盘制作工具制作启动u盘推荐使用ultraiso曾使用过Universal-USB-Installer使用时出现了一点问题到最后u盘还是启动不了。
+有的iso文件带有setup可直接在系统中双击打开安装系统，不需要制作系统u盘
+在安装双系统的时候个人感觉最好另开辟一个分区如linux的话20g">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-双系统" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/双系统/" class="article-date">
+  <time datetime="2017-03-27T00:09:10.738Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title：-学习"><a href="#title：-学习" class="headerlink" title="title： 学习"></a>title： 学习</h2><p>##linux与windows双系统安装</p>
+<p>###安装linux###<br>需要使用linuxu盘制作工具制作启动u盘<br>推荐使用ultraiso<br>曾使用过Universal-USB-Installer使用时出现了一点问题到最后u盘还是启动不了。</p>
+<p>有的iso文件带有setup可直接在系统中双击打开安装系统，不需要制作系统u盘</p>
+<p>在安装双系统的时候个人感觉最好另开辟一个分区如linux的话20g就够用了，到时把linux系统装到这个盘中。linux系统有很多名字，ubuntu啊麒麟什么的可按自己的爱好选择，本质上都是linux系统，可能会有些许的指令不同。</p>
+<p>先说一些问题，如果之后你想可以在window系统下选择启动哪个系统的话，你需要去网上找一些教程比如easybcd这个软件可以管理window启动项，easybcd推荐去官网下载，上边也有免费版的是针对个人发布的，但这里有一个坑，你需要看教程把linux系统的分盘做好，不然无法在easybcd下管理启动项。如果想在linux下引导系统，linux有自己的管理启动系统的工具，不需要重新安装，但是我的系统下window启动出现了一点问题，听说子啊linux下有一个修复启动的指令，如果遇问题就可以直接搜指令。但现在我还没有解决，就只能开机按f12的蛋疼操作了。</p>
+<p>做好u盘之后重新启动，可能需要先关机在开始重启，在打开电源的时候疯狂按f2进入bios页面配置启动项找到你的u盘设置其优先级，不同的电脑或许会不同，我得电脑按f12也可以直接选择从哪个系统启动，之后就按照linux系统的提示一步步安装linux系统。</p>
+<p>双系统其实没什么，不是什么高大上的东西，我现在才意识到这一点，而且在window下用vmware卡疯的我终于有了linux的系统体验，虽然现在还是补太会用，但比在虚拟机下好多了，现在才感觉装系统其实是一个及其简单的过程，而且就我现在看来，完全不必担心装系统给电脑装坏了，根本坏不了，只是需要保存一些要留的图片表格什么东西一类的，软件都可以再装，而且window10也有各种破解，所以如果想让电脑更快，重装系统把，如果被虚拟机搞崩溃了，就装双系统吧，一切都是这么简单。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/27/双系统/" data-id="cj0rcx61m00011kuogt5ysixp" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/24/是什么？/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">是什么？</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/27/双系统/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/24/是什么？/">是什么？</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/21/简单网络爬虫/">java简单爬虫制作并爬取图片</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/19/制作自己的qq机器人/">实现自己的qq机器人</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/19/制作自己的博客并上传/">制作自己的博客并上传</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
