@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,304 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-summer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/14/summer/" class="article-date">
+  <time datetime="2017-07-13T21:05:12.780Z" itemprop="datePublished">2017-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="laravel依赖注入-loc-容器"><a href="#laravel依赖注入-loc-容器" class="headerlink" title="laravel依赖注入,loc,容器"></a>laravel依赖注入,loc,容器</h2><blockquote>
+<p>#依赖注入#<br>关于laravel我一直都想深入解析他的整个框架的源码，希望能够以此一<br>窥整个框架的优势和真正优雅的地方，于是我开始接触了laravel学院关<br>于laravel框架的底层篇，了解了什么是控制反转，依赖注入，以及服务提供者和门面</p>
+<p>##依赖##</p>
+<blockquote>
+<p>先说说什么是依赖：面向对象编程，有以下几样东西无时不刻的接触：接口、类还有对象。这其中，接口是类的原型，一个类必须要遵守其实现的接口。比如我们从网站上引用的例子，超人和能力的例子：</p>
+</blockquote>
+<pre><code>class Superman {}
+
+class Power {
+/**
+ * 能力值
+ */
+protected $ability;
+
+/**
+ * 能力范围或距离
+ */
+protected $range;
+
+public function __construct($ability, $range)
+{
+    $this-&gt;ability = $ability;
+    $this-&gt;range = $range;
+}
+}
+</code></pre><blockquote>
+<p>这时我们就需要再修改超人类为他写入能力</p>
+</blockquote>
+</blockquote>
+<pre><code>class Superman
+{
+    protected $power;
+
+    public function __construct()
+    {
+        $this-&gt;power = new Power(999, 100);
+    }
+}
+</code></pre><blockquote>
+<blockquote>
+<p>如此就产生了一个依赖，超人依赖能力类,在面向对象的编程时这种依赖会产生很多，特别是当数量达到一定程度时，每次想要新加一个功能就需要该很多的文件就如上面的超人的构造函数一般。<br>比如我们给超人新加了几个能力，那么在构造时候我们还需要进行大量的修改</p>
+</blockquote>
+</blockquote>
+<pre><code>class Superman
+{
+    protected $power;
+
+    public function __construct()
+    {
+        $this-&gt;power = new Fight(9, 100);
+        // $this-&gt;power = new Force(45);
+        // $this-&gt;power = new Shot(99, 50, 2);
+        /*
+        $this-&gt;power = array(
+            new Force(45),
+            new Shot(99, 50, 2)
+        );
+        */
+    }
+}
+</code></pre><blockquote>
+<blockquote>
+<p>而这样大量的手工劳动是很让人头疼的，因此我们就想方法，超人的能力可以被随时更换，只需要添加或者更新一个芯片或者其他装置啥的（想到钢铁侠没）。这样的话就不要整个重新来过了。于是出现了两种方法，一种是工厂模式，一种是容器模式</p>
+<p>##工厂模式##<br>工厂模式：我们可以想到，组件、工具（或者超人的模组），是一种可被生产的玩意儿，生产的地方当然是 “工厂（Factory）”，于是有人就提出了这样一种模式： 工厂模式</p>
+<p>我们为了给超人制造超能力模组，我们创建了一个工厂，它可以制造各种各样的模组，且仅需要通过一个方法：</p>
+</blockquote>
+</blockquote>
+<pre><code>class SuperModuleFactory
+{
+    public function makeModule($moduleName, $options)
+    {
+        switch ($moduleName) {
+            case &apos;Fight&apos;: 
+                return new Fight($options[0], $options[1]);
+            case &apos;Force&apos;: 
+                return new Force($options[0]);
+            case &apos;Shot&apos;: 
+                return new Shot($options[0], $options[1], $options[2]);
+        }
+    }
+}
+</code></pre><blockquote>
+<blockquote>
+<p>这时候，超人 创建之初就可以使用这个工厂！<br>    class Superman<br>    {<br>        protected $power;</p>
+</blockquote>
+</blockquote>
+<pre><code>    public function __construct()
+    {
+        // 初始化工厂
+        $factory = new SuperModuleFactory;
+
+        // 通过工厂提供的方法制造需要的模块
+        $this-&gt;power = $factory-&gt;makeModule(&apos;Fight&apos;, [9, 100]);
+        // $this-&gt;power = $factory-&gt;makeModule(&apos;Force&apos;, [45]);
+        // $this-&gt;power = $factory-&gt;makeModule(&apos;Shot&apos;, [99, 50, 2]);
+        /*
+        $this-&gt;power = array(
+            $factory-&gt;makeModule(&apos;Force&apos;, [45]),
+            $factory-&gt;makeModule(&apos;Shot&apos;, [99, 50, 2])
+        );
+        */
+    }
+}
+</code></pre><blockquote>
+<blockquote>
+<p>当我们再进行一定的优化时<br>    class Superman<br>    {<br>        protected $power;</p>
+</blockquote>
+</blockquote>
+<pre><code>    public function __construct(array $modules)
+    {
+        // 初始化工厂
+        $factory = new SuperModuleFactory;
+
+        // 通过工厂提供的方法制造需要的模块
+        foreach ($modules as $moduleName =&gt; $moduleOptions) {
+            $this-&gt;power[] = $factory-&gt;makeModule($moduleName, $moduleOptions);
+        }
+    }
+}
+
+// 创建超人
+$superman = new Superman([
+    &apos;Fight&apos; =&gt; [9, 100],
+    &apos;Shot&apos; =&gt; [99, 50, 2]
+]);
+</code></pre><blockquote>
+<blockquote>
+<p>于是我们便可以省掉很多的手工劳动</p>
+</blockquote>
+<p>##loc容器##</p>
+<blockquote>
+<p>其实大多数情况下，工厂模式已经足够了。工厂模式的缺点就是：接口未知（即没有一个很好的契约模型，关于这个我马上会有解释）、产生对象类型单一。总之就是，还是不够灵活。虽然如此，工厂模式依旧十分优秀，并且适用于绝大多数情况。不过我们为了讲解后面的依赖注入 ，这里就先夸大一下工厂模式的缺陷咯。</p>
+<p>由于工厂模式下，所有的模组都已经在工厂类中安排好了，如果有新的、高级的模组加入，我们必须修改工厂类（好比增加新的生产线）</p>
+</blockquote>
+<pre><code>class SuperModuleFactory
+{
+    public function makeModule($moduleName, $options)
+    {
+        switch ($moduleName) {
+            case &apos;Fight&apos;: 
+                return new Fight($options[0], $options[1]);
+            case &apos;Force&apos;: 
+                return new Force($options[0]);
+            case &apos;Shot&apos;: 
+                return new Shot($options[0], $options[1], $options[2]);
+            // case &apos;more&apos;: .......
+            // case &apos;and more&apos;: .......
+            // case &apos;and more&apos;: .......
+            // case &apos;oh no! its too many!&apos;: .......
+        }
+    }
+}
+</code></pre><blockquote>
+<p>这种多case的情况会让人抓狂<br>由于对超能力模组的需求不断增大，我们需要集合整个世界的高智商人才，一起解决问题，不应该仅仅只有几个工厂垄断负责。</p>
+<p>因而为满足多人开发需要，我们需要设计一个接口，就像每个人都可以开发自己的工厂，然后整合到超人里，但超人的能力必须满足要求，就像不能超人每次面对boss都一招秒，那这电影还有什么可看的，他都是必须要激发新能力爆发的。因而有了接口:</p>
+</blockquote>
+<pre><code>interface SuperModuleInterface
+{
+    /**
+     * 超能力激活方法
+     *
+     * 任何一个超能力都得有该方法，并拥有一个参数
+     *@param array $target 针对目标，可以是一个或多个，自己或他人
+     */
+    public function activate(array $target);
+}
+</code></pre><blockquote>
+<p>这时候每个人都可以开发自己的潜能了。</p>
+</blockquote>
+<pre><code>/**
+ * X-超能量
+ */
+class XPower implements SuperModuleInterface
+{
+    public function activate(array $target)
+    {
+        // 这只是个例子。。具体自行脑补
+    }
+}
+
+/**
+ * 终极炸弹 （就这么俗）
+ */
+class UltraBomb implements SuperModuleInterface
+{
+    public function activate(array $target)
+    {
+        // 这只是个例子。。具体自行脑补
+    }
+}
+</code></pre><blockquote>
+<p>对此我们对超人改造</p>
+</blockquote>
+</blockquote>
+<pre><code>class Superman
+{
+    protected $module;
+
+    public function __construct(SuperModuleInterface $module)
+    {
+        $this-&gt;module = $module;
+    }
+}
+</code></pre><blockquote>
+<blockquote>
+<p>这样就防止有人破坏游戏平衡<br>由此就可以大致了解了依赖注入<br>本文从开头到现在提到的一系列依赖，只要不是由内部生产（比如初始化、构造函数 __construct 中通过工厂方法、自行手动 new 的），而是由外部以参数或其他形式注入的，都属于依赖注入（DI） 。是不是豁然开朗？事实上，就是这么简单。下面就是一个典型的依赖注入：</p>
+</blockquote>
+<pre><code>// 超能力模组
+$superModule = new XPower;
+// 初始化一个超人，并注入一个超能力模组依赖
+$superMan = new Superman($superModule);
+</code></pre><blockquote>
+<p>我们不需要借助构造函数写一堆麻烦的东西了，而且我们也可以想给超人什么能力就给什么能力。上述的代码还是需要new这个关键词的，可偏偏很多人就是讨厌new这个关键词，看见他心里难受，而且这样效率是很低的，高端玩家是不喜欢玩这种东西的，于是他们发明了让人更加看不懂的东西。这种更为高级的工厂，就是工厂模式的升华 —— IoC 容器。</p>
+</blockquote>
+<pre><code>class Container
+{
+    protected $binds;
+
+    protected $instances;
+
+    public function bind($abstract, $concrete)
+    {
+        if ($concrete instanceof Closure) {
+            $this-&gt;binds[$abstract] = $concrete;
+        } else {
+            $this-&gt;instances[$abstract] = $concrete;
+        }
+    }
+
+    public function make($abstract, $parameters = [])
+    {
+        if (isset($this-&gt;instances[$abstract])) {
+            return $this-&gt;instances[$abstract];
+        }
+
+        array_unshift($parameters, $this);
+
+        return call_user_func_array($this-&gt;binds[$abstract], $parameters);
+    }
+}
+</code></pre><blockquote>
+<p>这时候，一个十分粗糙的容器就诞生了。现在的确很简陋，但不妨碍我们进一步提升他。先着眼现在，看看这个容器如何使用吧！</p>
+</blockquote>
+<pre><code>// 创建一个容器（后面称作超级工厂）
+$container = new Container;
+
+// 向该 超级工厂添加超人的生产脚本
+$container-&gt;bind(&apos;superman&apos;, function($container, $moduleName) {
+    return new Superman($container-&gt;make($moduleName));
+});
+
+// 向该 超级工厂添加超能力模组的生产脚本
+$container-&gt;bind(&apos;xpower&apos;, function($container) {
+    return new XPower;
+});
+
+// 同上
+$container-&gt;bind(&apos;ultrabomb&apos;, function($container) {
+    return new UltraBomb;
+});
+
+// ****************** 华丽丽的分割线 **********************
+// 开始启动生产
+$superman_1 = $container-&gt;make(&apos;superman&apos;, &apos;xpower&apos;);
+$superman_2 = $container-&gt;make(&apos;superman&apos;, &apos;ultrabomb&apos;);
+$superman_3 = $container-&gt;make(&apos;superman&apos;, &apos;xpower&apos;);
+// ...随意添加
+</code></pre><blockquote>
+<p>看到没？通过最初的 绑定（bind） 操作，我们向 超级工厂 注册了一些生产脚本，这些生产脚本在生产指令下达之时便会执行。发现没有？我们彻底的解除了 超人 与 超能力模组 的依赖关系，更重要的是，容器类也丝毫没有和他们产生任何依赖！我们通过注册、绑定的方式向容器中添加一段可以被执行的回调（可以是匿名函数、非匿名函数、类的方法）作为生产一个类的实例的 脚本 ，只有在真正的 生产（make） 操作被调用执行时，才会触发。这样一种方式，使得我们更容易在创建一个实例的同时解决其依赖关系，并且更加灵活。当有新的需求，只需另外绑定一个“生产脚本”即可。</p>
+</blockquote>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/14/summer/" data-id="cj52z2mde00012guoect1seku" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-双系统" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -85,7 +383,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/双系统/" data-id="cj0rcx61m00011kuogt5ysixp" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/03/27/双系统/" data-id="cj52z2me600032guole069evi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -131,7 +429,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/24/是什么？/" data-id="cj0rcx63s00061kuojlqel5qi" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/03/24/是什么？/" data-id="cj52z2meb00042guoh61em5ci" class="article-share-link">Share</a>
       
       
     </footer>
@@ -508,7 +806,7 @@ public class DownloadUtils {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/21/简单网络爬虫/" data-id="cj0rcx62x00041kuoyjitgw0u" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/03/21/简单网络爬虫/" data-id="cj52z2mes00052guo89yk8w6t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -681,7 +979,7 @@ public class DownloadUtils {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/19/制作自己的qq机器人/" data-id="cj0rcx62200031kuod2hl3a14" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/03/19/制作自己的qq机器人/" data-id="cj52z2mew00062guo7cjf9ylb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -747,7 +1045,7 @@ public class DownloadUtils {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/19/制作自己的博客并上传/" data-id="cj0rcx63d00051kuotg8dp4qq" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/03/19/制作自己的博客并上传/" data-id="cj52z2mge00072guoi08jq9mj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -804,7 +1102,7 @@ public class DownloadUtils {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/18/once_study/" data-id="cj0rcx64800071kuomsgrogy4" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/03/18/once_study/" data-id="cj52z2mhh00082guohga7smq9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -843,7 +1141,7 @@ public class DownloadUtils {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/16/little_bean/" data-id="cj0rcx62200021kuoqk9d09ik" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/03/16/little_bean/" data-id="cj52z2mcw00002guo22kzwyqw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -888,7 +1186,7 @@ public class DownloadUtils {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/16/hello-world/" data-id="cj0rcx60r00001kuoym4h42mi" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/03/16/hello-world/" data-id="cj52z2me200022guol7rz6q8m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -915,7 +1213,7 @@ public class DownloadUtils {
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
     </div>
   </div>
 
@@ -923,9 +1221,13 @@ public class DownloadUtils {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/07/14/summer/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2017/03/27/双系统/">(no title)</a>
@@ -943,10 +1245,6 @@ public class DownloadUtils {
             <a href="/2017/03/19/制作自己的qq机器人/">实现自己的qq机器人</a>
           </li>
         
-          <li>
-            <a href="/2017/03/19/制作自己的博客并上传/">制作自己的博客并上传</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -960,7 +1258,7 @@ public class DownloadUtils {
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 John Doe<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
