@@ -3,30 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>laravel依赖注入,loc,容器 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="laravel依赖注入,loc,容器
-#依赖注入#关于laravel我一直都想深入解析他的整个框架的源码，希望能够以此一窥整个框架的优势和真正优雅的地方，于是我开始接触了laravel学院关于laravel框架的底层篇，了解了什么是控制反转，依赖注入，以及服务提供者和门面
+  <meta name="description" content="#依赖注入#关于laravel我一直都想深入解析他的整个框架的源码，希望能够以此一窥整个框架的优势和真正优雅的地方，于是我开始接触了laravel学院关于laravel框架的底层篇，了解了什么是控制反转，依赖注入，以及服务提供者和门面
 ##依赖##
 
-先说说什么是依赖：面向对象编程，有以下几样东西无时不刻的接触：接口、类还有对象。这其中，接口是类的原型，一个">
+先说说什么是依赖：面向对象编程，有以下几样东西无时不刻的接触：接口、类还有对象。这其中，接口是类的原型，一个类必须要遵守其实现的接口。比如我们从网">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="laravel依赖注入,loc,容器">
 <meta property="og:url" content="http://yoursite.com/2017/07/14/summer/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="laravel依赖注入,loc,容器
-#依赖注入#关于laravel我一直都想深入解析他的整个框架的源码，希望能够以此一窥整个框架的优势和真正优雅的地方，于是我开始接触了laravel学院关于laravel框架的底层篇，了解了什么是控制反转，依赖注入，以及服务提供者和门面
+<meta property="og:description" content="#依赖注入#关于laravel我一直都想深入解析他的整个框架的源码，希望能够以此一窥整个框架的优势和真正优雅的地方，于是我开始接触了laravel学院关于laravel框架的底层篇，了解了什么是控制反转，依赖注入，以及服务提供者和门面
 ##依赖##
 
-先说说什么是依赖：面向对象编程，有以下几样东西无时不刻的接触：接口、类还有对象。这其中，接口是类的原型，一个">
-<meta property="og:updated_time" content="2017-07-13T21:53:02.426Z">
+先说说什么是依赖：面向对象编程，有以下几样东西无时不刻的接触：接口、类还有对象。这其中，接口是类的原型，一个类必须要遵守其实现的接口。比如我们从网">
+<meta property="og:updated_time" content="2017-07-13T21:57:48.261Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="laravel依赖注入,loc,容器
-#依赖注入#关于laravel我一直都想深入解析他的整个框架的源码，希望能够以此一窥整个框架的优势和真正优雅的地方，于是我开始接触了laravel学院关于laravel框架的底层篇，了解了什么是控制反转，依赖注入，以及服务提供者和门面
+<meta name="twitter:title" content="laravel依赖注入,loc,容器">
+<meta name="twitter:description" content="#依赖注入#关于laravel我一直都想深入解析他的整个框架的源码，希望能够以此一窥整个框架的优势和真正优雅的地方，于是我开始接触了laravel学院关于laravel框架的底层篇，了解了什么是控制反转，依赖注入，以及服务提供者和门面
 ##依赖##
 
-先说说什么是依赖：面向对象编程，有以下几样东西无时不刻的接触：接口、类还有对象。这其中，接口是类的原型，一个">
+先说说什么是依赖：面向对象编程，有以下几样东西无时不刻的接触：接口、类还有对象。这其中，接口是类的原型，一个类必须要遵守其实现的接口。比如我们从网">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -85,10 +82,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      laravel依赖注入,loc,容器
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<h2 id="laravel依赖注入-loc-容器"><a href="#laravel依赖注入-loc-容器" class="headerlink" title="laravel依赖注入,loc,容器"></a>laravel依赖注入,loc,容器</h2><blockquote>
+        <blockquote>
 <p>#依赖注入#<br>关于laravel我一直都想深入解析他的整个框架的源码，希望能够以此一<br>窥整个框架的优势和真正优雅的地方，于是我开始接触了laravel学院关<br>于laravel框架的底层篇，了解了什么是控制反转，依赖注入，以及服务提供者和门面</p>
 <p>##依赖##</p>
 <blockquote>
@@ -363,7 +369,7 @@ $superman_3 = $container-&gt;make(&apos;superman&apos;, &apos;xpower&apos;);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/07/14/summer/" data-id="cj52z2mde00012guoect1seku" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/07/14/summer/" data-id="cj52z77yy000110uo3q34whpo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -412,7 +418,7 @@ $superman_3 = $container-&gt;make(&apos;superman&apos;, &apos;xpower&apos;);
       <ul>
         
           <li>
-            <a href="/2017/07/14/summer/">(no title)</a>
+            <a href="/2017/07/14/summer/">laravel依赖注入,loc,容器</a>
           </li>
         
           <li>
